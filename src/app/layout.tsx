@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  // 800 removed — no element in the design sets heavier than 700.
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
   variable: "--font-plus-jakarta-sans",
   display: "swap",
 });
@@ -24,9 +22,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={plusJakartaSans.variable}>
-      {/* Background, text colour and font stack come from globals.css / preflight. */}
-      <body className="antialiased">
-        <Providers>{children}</Providers>
+      <body className="bg-white text-brand-black font-sans antialiased">
+        {children}
       </body>
     </html>
   );

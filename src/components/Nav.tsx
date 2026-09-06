@@ -1,29 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { CaretDown, List, X } from "@phosphor-icons/react/ssr";
-import { PROPERTIES } from "@/lib/properties";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-const EASE = [0.2, 0.7, 0.3, 1] as const;
-
-const NAV_LINKS = [
-  { href: "#mortgage", label: "Mortgage", badge: true },
-  { href: "#company", label: "Company" },
-  { href: "#careers", label: "Careers" },
-  { href: "#blog", label: "Blog" },
-];
+const PROPERTIES = ["Aether Heights", "Azure Sanctuary", "Summit Pavilion"];
 
 const FOCUSABLE =
   'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
-
-function NewBadge() {
-  return (
-    <span className="bg-brand-black text-[10px] text-white px-2 py-0.5 rounded-full font-semibold uppercase tracking-wider">
-      New
-    </span>
-  );
-}
 
 export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -104,12 +87,9 @@ export default function Nav() {
   }, [mobileOpen]);
 
   return (
-    <header className="glass-panel sticky top-0 z-50">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-border/50">
       <div className="max-w-wrap mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        <a
-          href="#home"
-          className="text-xl font-semibold tracking-wider text-brand-black"
-        >
+        <a href="#home" className="text-xl font-extrabold tracking-wider text-brand-black">
           ZENITH REALTY
         </a>
 
@@ -132,68 +112,54 @@ export default function Nav() {
               aria-haspopup="true"
               aria-controls="properties-menu"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex items-center gap-1 py-2 transition-colors duration-300 hover:text-brand-black"
+              className="flex items-center gap-1 hover:text-brand-black transition-colors py-2"
             >
               Properties
-              <CaretDown
+              <ChevronDown
                 className={`w-4 h-4 text-brand-black/60 transition-transform duration-300 ${
                   dropdownOpen ? "rotate-180" : ""
                 }`}
-                weight="light"
-                aria-hidden="true"
               />
             </button>
-
-            <AnimatePresence>
-              {dropdownOpen ? (
-                <motion.div
-                  id="properties-menu"
-                  initial={{ opacity: 0, scaleY: 0.96, y: -4 }}
-                  animate={{
-                    opacity: 1,
-                    scaleY: 1,
-                    y: 0,
-                    transition: { duration: 0.18, ease: EASE },
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scaleY: 0.96,
-                    y: -4,
-                    transition: { duration: 0.12, ease: EASE },
-                  }}
-                  className="absolute left-0 top-full mt-1 w-48 origin-top bg-white border border-brand-border rounded-sm shadow-lg py-2"
-                >
-                  {PROPERTIES.map(({ name }) => (
-                    <a
-                      key={name}
-                      href="#listings"
-                      onClick={() => setDropdownOpen(false)}
-                      className="block px-4 py-2 transition-colors duration-200 hover:bg-brand-lightGray"
-                    >
-                      {name}
-                    </a>
-                  ))}
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
+            {dropdownOpen && (
+              <div
+                id="properties-menu"
+                className="absolute left-0 top-full mt-1 w-48 bg-white border border-brand-border rounded-lg shadow-lg py-2"
+              >
+                {PROPERTIES.map((name) => (
+                  <a
+                    key={name}
+                    href="#listings"
+                    onClick={() => setDropdownOpen(false)}
+                    className="block px-4 py-2 hover:bg-brand-lightGray transition-colors"
+                  >
+                    {name}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
-
-          {NAV_LINKS.map(({ href, label, badge }) => (
-            <a
-              key={href}
-              href={href}
-              className="flex items-center gap-2 transition-colors duration-300 hover:text-brand-black"
-            >
-              {label}
-              {badge ? <NewBadge /> : null}
-            </a>
-          ))}
+          <a href="#mortgage" className="flex items-center gap-2 hover:text-brand-black transition-colors">
+            Mortgage
+            <span className="bg-brand-black text-[10px] text-white px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+              New
+            </span>
+          </a>
+          <a href="#company" className="hover:text-brand-black transition-colors">
+            Company
+          </a>
+          <a href="#careers" className="hover:text-brand-black transition-colors">
+            Careers
+          </a>
+          <a href="#blog" className="hover:text-brand-black transition-colors">
+            Blog
+          </a>
         </nav>
 
         <div className="flex items-center gap-4">
           <a
             href="#post-property"
-            className="hidden sm:inline-block border border-brand-black px-6 py-2.5 rounded-sm text-sm font-semibold tracking-wide transition-colors duration-300 hover:bg-brand-black hover:text-white"
+            className="hidden sm:inline-block border border-brand-black px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-brand-black hover:text-white transition-all duration-300"
           >
             Post a property
           </a>
@@ -206,57 +172,64 @@ export default function Nav() {
             aria-controls="mobile-menu"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
           >
-            {mobileOpen ? (
-              <X className="w-6 h-6" weight="light" aria-hidden="true" />
-            ) : (
-              <List className="w-6 h-6" weight="light" aria-hidden="true" />
-            )}
+            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen ? (
-          <motion.div
-            id="mobile-menu"
-            ref={drawerRef}
-            initial={{ opacity: 0, y: -12 }}
-            animate={{
-              opacity: 1,
-              y: 0,
-              transition: { type: "spring", stiffness: 260, damping: 30 },
-            }}
-            exit={{ opacity: 0, y: -12, transition: { duration: 0.18 } }}
-            className="md:hidden fixed inset-x-0 top-20 bg-white border-b border-brand-border p-6 flex flex-col space-y-4 shadow-xl"
+      {mobileOpen && (
+        <div
+          id="mobile-menu"
+          ref={drawerRef}
+          className="md:hidden fixed inset-x-0 top-20 bg-white border-b border-brand-border p-6 flex flex-col space-y-4 shadow-xl"
+        >
+          <a
+            href="#listings"
+            onClick={() => setMobileOpen(false)}
+            className="text-lg font-medium hover:text-brand-gray transition-colors"
           >
-            <a
-              href="#listings"
-              onClick={() => setMobileOpen(false)}
-              className="text-lg font-medium transition-colors duration-300 hover:text-brand-gray"
-            >
-              Properties
-            </a>
-            {NAV_LINKS.map(({ href, label, badge }) => (
-              <a
-                key={href}
-                href={href}
-                onClick={() => setMobileOpen(false)}
-                className="text-lg font-medium flex items-center justify-between transition-colors duration-300 hover:text-brand-gray"
-              >
-                {label}
-                {badge ? <NewBadge /> : null}
-              </a>
-            ))}
-            <a
-              href="#post-property"
-              onClick={() => setMobileOpen(false)}
-              className="inline-block border border-brand-black px-6 py-2.5 rounded-sm text-sm font-semibold tracking-wide text-center"
-            >
-              Post a property
-            </a>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+            Properties
+          </a>
+          <a
+            href="#mortgage"
+            onClick={() => setMobileOpen(false)}
+            className="text-lg font-medium flex items-center justify-between hover:text-brand-gray transition-colors"
+          >
+            Mortgage
+            <span className="bg-brand-black text-[10px] text-white px-2 py-0.5 rounded-full font-bold uppercase">
+              New
+            </span>
+          </a>
+          <a
+            href="#company"
+            onClick={() => setMobileOpen(false)}
+            className="text-lg font-medium hover:text-brand-gray transition-colors"
+          >
+            Company
+          </a>
+          <a
+            href="#careers"
+            onClick={() => setMobileOpen(false)}
+            className="text-lg font-medium hover:text-brand-gray transition-colors"
+          >
+            Careers
+          </a>
+          <a
+            href="#blog"
+            onClick={() => setMobileOpen(false)}
+            className="text-lg font-medium hover:text-brand-gray transition-colors"
+          >
+            Blog
+          </a>
+          <a
+            href="#post-property"
+            onClick={() => setMobileOpen(false)}
+            className="inline-block border border-brand-black px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide text-center"
+          >
+            Post a property
+          </a>
+        </div>
+      )}
     </header>
   );
 }
