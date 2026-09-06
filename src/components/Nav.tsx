@@ -87,9 +87,9 @@ export default function Nav() {
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-border/50">
+    <header className="sticky top-0 z-50 bg-white border-b border-brand-border/50">
       <div className="max-w-wrap mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        <a href="#home" className="text-xl font-extrabold tracking-wider text-brand-black">
+        <a href="#home" className="text-xl font-extrabold tracking-wider text-brand-black leading-[1.05] max-w-[7ch]">
           ZENITH REALTY
         </a>
 
@@ -159,7 +159,7 @@ export default function Nav() {
         <div className="flex items-center gap-4">
           <a
             href="#post-property"
-            className="hidden sm:inline-block border border-brand-black px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-brand-black hover:text-white transition-all duration-300"
+            className="inline-block border border-brand-black px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide hover:bg-brand-black hover:text-white transition-all duration-300"
           >
             Post a property
           </a>

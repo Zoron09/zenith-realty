@@ -3,18 +3,14 @@ import FadeInSection from "./FadeInSection";
 
 export default function ExclusiveCollection() {
   return (
-    <FadeInSection
-      className="pt-6"
-    >
+    <FadeInSection className="pt-6">
+      {/* Reference: narrow white text panel beside a larger square-cornered image. */}
       <section
         id="company"
-        className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
       >
-        <div className="lg:col-span-5 space-y-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-brand-gray block">
-            Architectural Excellence
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.15]">
+        <div className="lg:col-span-4 bg-white p-8 md:p-10 flex flex-col justify-center space-y-6">
+          <h2 className="text-4xl md:text-5xl font-medium tracking-tight leading-[1.15]">
             Exclusive collection
           </h2>
           <p className="text-brand-gray text-base md:text-lg leading-relaxed font-normal">
@@ -33,12 +29,12 @@ export default function ExclusiveCollection() {
           </div>
         </div>
 
-        <div className="lg:col-span-7 relative rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-[16/11] max-h-[600px] shadow-md bg-brand-lightGray group">
+        <div className="lg:col-span-8 relative overflow-hidden aspect-[4/5] lg:aspect-auto lg:min-h-[560px] max-h-[600px] bg-brand-lightGray group">
           <Image
-            src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1712799430351-8baa17927177?auto=format&fit=crop&w=1200&q=80"
             alt="Exclusive Concrete Luxury Architecture"
             fill
-            sizes="(min-width: 1024px) 58vw, 100vw"
+            sizes="(min-width: 1024px) 67vw, 100vw"
             className="object-cover group-hover:scale-105 transition-transform duration-[1500ms] ease-out"
           />
         </div>

@@ -18,7 +18,7 @@ const PROPERTIES: Property[] = [
     location: "USA / California / Malibu",
     badge: "Malibu",
     image:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1745761320791-5ae142edee8c?auto=format&fit=crop&w=800&q=80",
     specs: [
       { icon: Maximize, label: "200 m²" },
       { icon: Layers, label: "1 Floor" },
@@ -32,7 +32,7 @@ const PROPERTIES: Property[] = [
     location: "Caribbean / Bahamas / Breezy",
     badge: "Bahamas",
     image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=800&q=80",
     specs: [
       { icon: Maximize, label: "250 m²" },
       { icon: Layers, label: "1 Floor" },
@@ -46,7 +46,7 @@ const PROPERTIES: Property[] = [
     location: "USA / Colorado / Vail",
     badge: "Vail",
     image:
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1680874261352-ed1ee3d1cf01?auto=format&fit=crop&w=800&q=80",
     specs: [
       { icon: Maximize, label: "420 m²" },
       { icon: Layers, label: "3 Floors" },
@@ -58,8 +58,8 @@ const PROPERTIES: Property[] = [
 
 function PropertyCard({ property }: { property: Property }) {
   return (
-    <div className="group space-y-4">
-      <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-sm bg-brand-lightGray">
+    <div className="group bg-white">
+      <div className="relative aspect-[4/3] overflow-hidden bg-brand-lightGray">
         <Image
           src={property.image}
           alt={`${property.name}, ${property.badge}`}
@@ -67,11 +67,8 @@ function PropertyCard({ property }: { property: Property }) {
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
           className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
         />
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">
-          {property.badge}
-        </div>
       </div>
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between px-4 pt-4">
         <div className="space-y-1">
           <h3 className="text-xl font-bold tracking-tight text-brand-black group-hover:text-brand-gray transition-colors">
             {property.name}
@@ -82,11 +79,11 @@ function PropertyCard({ property }: { property: Property }) {
           <span className="text-xl font-extrabold text-brand-black">{property.price}</span>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-2 pt-2 border-t border-brand-border/60 text-xs text-brand-gray font-semibold">
+      <div className="grid grid-cols-4 gap-2 mx-4 mt-4 pt-2 pb-4 border-t border-brand-border/60 text-xs text-brand-gray font-semibold">
         {property.specs.map(({ icon: Icon, label }) => (
           <div
             key={label}
-            className="flex flex-col items-center p-2 bg-brand-lightGray rounded-lg text-center"
+            className="flex flex-col items-center p-2 bg-brand-lightGray text-center"
           >
             <Icon className="w-4 h-4 mb-1 text-brand-black/60" />
             <span>{label}</span>
@@ -102,7 +99,7 @@ export default function PropertyGrid() {
     <section id="listings" className="space-y-12 pt-6">
       <FadeInSection className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end border-b border-brand-border/60 pb-8">
         <div className="lg:col-span-7">
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-3xl md:text-5xl font-medium tracking-tight">
             Guiding you toward the residence of your dreams
           </h2>
         </div>

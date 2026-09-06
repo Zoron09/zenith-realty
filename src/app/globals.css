@@ -7,8 +7,13 @@ html {
 }
 
 body {
-  background-color: #ffffff;
+  /* Reference ground is a light grey, with white nav and white content panels. */
+  background-color: #f7f7f7;
   color: #0a0a0a;
+  /* .full-bleed uses 100vw; clip keeps the scrollbar from causing x-overflow.
+     Unlike overflow-x: hidden this creates no scroll container, so the sticky
+     header keeps working. */
+  overflow-x: clip;
 }
 
 ::selection {
@@ -16,10 +21,19 @@ body {
   color: #ffffff;
 }
 
+@layer components {
+  /* Breaks an element out of the padded max-w-wrap container to viewport width,
+     matching the edge-to-edge hero in the reference. */
+  .full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+  }
+}
+
 @layer base {
   /* Kept from the accessibility pass: a visible keyboard focus indicator.
      :where() holds specificity at 0 so components can opt out without
-     !important. Neutral ink now that the brass accent token is gone. */
+     !important. */
   :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
     outline: 2px solid #0a0a0a;
     outline-offset: 2px;

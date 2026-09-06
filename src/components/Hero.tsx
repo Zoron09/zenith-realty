@@ -6,7 +6,7 @@ export default function Hero() {
     <section id="home" className="space-y-12">
       <FadeInSection className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-6">
         <div className="lg:col-span-7 space-y-8">
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-brand-black leading-[1.1] max-w-[650px]">
+          <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-brand-black leading-[1.1] max-w-[650px]">
             Discover space you truly belong in
           </h1>
           <div>
@@ -26,12 +26,13 @@ export default function Hero() {
         </div>
       </FadeInSection>
 
+      {/* Reference shows this edge to edge with square corners, not inset. */}
       <FadeInSection
         delay={0.1}
-        className="relative w-full aspect-[21/9] min-h-[300px] md:min-h-[500px] rounded-3xl overflow-hidden group shadow-lg"
+        className="full-bleed relative aspect-[21/9] min-h-[300px] md:min-h-[500px] overflow-hidden group"
       >
         <Image
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1679364297777-1db77b6199be?auto=format&fit=crop&w=2000&q=80"
           alt="Zenith Luxury Dusk Villa"
           fill
           preload
@@ -43,7 +44,7 @@ export default function Hero() {
           <span className="text-xs uppercase tracking-widest font-semibold opacity-80">
             Featured Residence
           </span>
-          <h3 className="text-xl md:text-3xl font-extrabold">
+          <h3 className="text-xl md:text-3xl font-medium">
             The Obsidian Meridian — Sunset Villa
           </h3>
         </div>
