@@ -1,5 +1,9 @@
-import Image from "next/image";
 import FadeInSection from "./FadeInSection";
+
+// Poster frame: the still that previously filled this slot, so there is a
+// sensible first paint while the video buffers.
+const HERO_POSTER =
+  "https://images.unsplash.com/photo-1679364297777-1db77b6199be?auto=format&fit=crop&w=2000&q=80";
 
 export default function Hero() {
   return (
@@ -26,18 +30,20 @@ export default function Hero() {
         </div>
       </FadeInSection>
 
-      {/* Reference shows this edge to edge with square corners, not inset. */}
+      {/* Full-bleed, square corners, no shadow — see design.md §4. */}
       <FadeInSection
         delay={0.1}
-        className="full-bleed relative aspect-[21/9] min-h-[300px] md:min-h-[500px] overflow-hidden group"
+        className="full-bleed relative aspect-[21/9] min-h-[300px] md:min-h-[500px] overflow-hidden"
       >
-        <Image
-          src="https://images.unsplash.com/photo-1679364297777-1db77b6199be?auto=format&fit=crop&w=2000&q=80"
-          alt="Zenith Luxury Dusk Villa"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-[2000ms] ease-out"
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/Cover%20Video.mp4"
+          poster={HERO_POSTER}
+          aria-label="Zenith Luxury Dusk Villa"
+          autoPlay
+          loop
+          muted
+          playsInline
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
         <div className="absolute bottom-6 left-6 md:left-12 text-white space-y-1">
