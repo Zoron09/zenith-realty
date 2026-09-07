@@ -1,9 +1,10 @@
+import Image from "next/image";
 import FadeInSection from "./FadeInSection";
 
-// Poster frame: the still that previously filled this slot, so there is a
-// sensible first paint while the video buffers.
-const HERO_POSTER =
-  "https://images.unsplash.com/photo-1679364297777-1db77b6199be?auto=format&fit=crop&w=2000&q=80";
+// Intrinsic size of public/hero-placeholder.jpg. Passed to next/image so it
+// knows the real aspect ratio; CSS then renders it at full width, auto height.
+const HERO_W = 5508;
+const HERO_H = 3072;
 
 export default function Hero() {
   return (
@@ -30,24 +31,24 @@ export default function Hero() {
         </div>
       </FadeInSection>
 
-      {/* Full-bleed, square corners, no shadow — see design.md §4. */}
-      <FadeInSection
-        delay={0.1}
-        className="full-bleed relative aspect-[21/9] min-h-[300px] md:min-h-[500px] overflow-hidden"
-      >
-        <video
-          className="absolute inset-0 h-full w-full object-cover"
-          src="/Cover%20Video.mp4"
-          poster={HERO_POSTER}
-          aria-label="Zenith Luxury Dusk Villa"
-          autoPlay
-          loop
-          muted
-          playsInline
+      {/* Full-bleed and uncropped: no aspect-ratio container and no object-cover,
+          so the section ends exactly where the image does. The image's sky is
+          already near-white (#FDFDFD), so it blends into the page ground and
+          needs no gradient scrim — see design.md §4. */}
+      <FadeInSection delay={0.1} className="full-bleed relative">
+        <Image
+          src="/hero-placeholder.jpg"
+          alt="The Obsidian Meridian — Sunset Villa"
+          width={HERO_W}
+          height={HERO_H}
+          sizes="100vw"
+          preload
+          className="block w-full h-auto"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        <div className="absolute bottom-6 left-6 md:left-12 text-white space-y-1">
-          <span className="text-xs uppercase tracking-widest font-semibold opacity-80">
+        {/* Dark text: the image is light where this sits (198,188,180),
+            so white would fail contrast at 1.87:1. Black measures 10.6:1. */}
+        <div className="absolute bottom-6 left-6 md:left-12 space-y-1 text-brand-black">
+          <span className="text-xs uppercase tracking-widest font-semibold text-brand-gray">
             Featured Residence
           </span>
           <h3 className="text-xl md:text-3xl font-medium">
