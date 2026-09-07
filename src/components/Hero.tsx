@@ -8,8 +8,9 @@ const HERO_H = 3072;
 
 export default function Hero() {
   return (
-    <section id="home" className="space-y-12">
-      <FadeInSection className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-6">
+    <section id="home">
+      {/* z-10 keeps the copy above the image, which follows it in the DOM. */}
+      <FadeInSection className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-6">
         <div className="lg:col-span-7 space-y-8">
           <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-brand-black leading-[1.1] max-w-[650px]">
             Discover space you truly belong in
@@ -31,30 +32,28 @@ export default function Hero() {
         </div>
       </FadeInSection>
 
-      {/* Full-bleed and uncropped: no aspect-ratio container and no object-cover,
-          so the section ends exactly where the image does. The image's sky is
-          already near-white (#FDFDFD), so it blends into the page ground and
-          needs no gradient scrim — see design.md §4. */}
-      <FadeInSection delay={0.1} className="full-bleed relative">
+      {/* The image slides up so its top sits behind the copy, and its own white
+          sky fills the space around the text instead of leaving a hard gap.
+          The offset is expressed in vw, not pixels, so the overlap stays the
+          same share of the image at any viewport: the image is 100vw / 1.793
+          ≈ 55.8vw tall, so 10vw ≈ 18% of its height. The image's sky runs
+          13.7–46% deep depending on the column, so the roofline always stays
+          clear of the headline, subtext and button. Smaller at < 768px, where
+          the copy stacks and the sky band is proportionally shallower.
+          Full-bleed and uncropped — no aspect container, no object-cover. */}
+      <FadeInSection
+        delay={0.1}
+        className="full-bleed relative -mt-[6vw] md:-mt-[10vw]"
+      >
         <Image
           src="/hero-placeholder.jpg"
-          alt="The Obsidian Meridian — Sunset Villa"
+          alt="Modern dark-clad residence at dusk"
           width={HERO_W}
           height={HERO_H}
           sizes="100vw"
           preload
           className="block w-full h-auto"
         />
-        {/* Dark text: the image is light where this sits (198,188,180),
-            so white would fail contrast at 1.87:1. Black measures 10.6:1. */}
-        <div className="absolute bottom-6 left-6 md:left-12 space-y-1 text-brand-black">
-          <span className="text-xs uppercase tracking-widest font-semibold text-brand-gray">
-            Featured Residence
-          </span>
-          <h3 className="text-xl md:text-3xl font-medium">
-            The Obsidian Meridian — Sunset Villa
-          </h3>
-        </div>
       </FadeInSection>
     </section>
   );
