@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 const PROPERTIES = ["Aether Heights", "Azure Sanctuary", "Summit Pavilion"];
@@ -89,8 +90,15 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-brand-border/50">
       <div className="max-w-wrap mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-        <a href="#home" className="text-xl font-extrabold tracking-wider text-brand-black leading-[1.05] max-w-[7ch]">
-          ZENITH REALTY
+        <a href="#home" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="M&H Developments"
+            width={637}
+            height={290}
+            className="h-10 w-auto"
+            preload
+          />
         </a>
 
         <nav className="hidden md:flex items-center space-x-8 text-[15px] font-medium text-brand-black/80">
