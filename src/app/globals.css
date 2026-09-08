@@ -7,8 +7,9 @@ html {
 }
 
 body {
-  /* Reference ground is a light grey, with white nav and white content panels. */
-  background-color: #f7f7f7;
+  /* Ground is white; #F7F8F9 is reserved for panels (contact form, service
+     cards) that need to stand apart from it. */
+  background-color: #ffffff;
   color: #0a0a0a;
   /* .full-bleed uses 100vw; clip keeps the scrollbar from causing x-overflow.
      Unlike overflow-x: hidden this creates no scroll container, so the sticky
@@ -19,6 +20,12 @@ body {
 ::selection {
   background-color: #0a0a0a;
   color: #ffffff;
+}
+
+@keyframes shine-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @layer components {

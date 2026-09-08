@@ -1,15 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 export default function FadeInSection({
   children,
   className,
+  style,
   delay = 0,
 }: {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   delay?: number;
 }) {
   return (
@@ -19,6 +21,7 @@ export default function FadeInSection({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, ease: "easeOut", delay }}
       className={className}
+      style={style}
     >
       {children}
     </motion.div>
